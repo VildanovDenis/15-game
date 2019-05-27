@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import GameBgComponents from '../gameBgComponent/index.jsx';
 import GamePlaygroundComponent from '../gamePlaygroundComponent/index.jsx';
 
-import initialCells from '../../GameData/index.js';
+import initialCells from '../../gameData/index.js';
 
 const StyledWrapper = styled.section`
     height: 475px;
