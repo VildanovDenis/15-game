@@ -1,9 +1,13 @@
 import React from 'react';
 
+import GameContainer from './GameContainer/index.jsx';
+
 export default class App extends React.Component {
     render() {
         return (
-            <div>1234</div>
+            <React.Fragment>
+                <GameContainer />
+            </React.Fragment>
         )
     }
 }
