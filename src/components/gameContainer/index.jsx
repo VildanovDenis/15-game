@@ -24,6 +24,18 @@ class GameContainer extends React.Component {
         }
     }
 
+    handleKeyPress(event) {
+        console.log(event.code);
+    }
+
+    componentDidMount() {
+        document.addEventListener('keypress', this.handleKeyPress);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keypress', this.handleKeyPress);
+    }
+
     render() {
         return (
             <StyledWrapper>
