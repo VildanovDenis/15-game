@@ -16,6 +16,9 @@ export const moveCells = (cells, moveDirection) => {
     const y = emptyCell.y;
 
     const nextCell = getNextCell(cells, x, y, moveDirection);
+
+    if (Object.keys(nextCell).length === 0) { return cells };
+
     const newCells = cells.filter(cell => {
         const isThereEmptyCell = (cell.value === emptyCell.value) ? true : false;
         const isThereNextCell = (cell.value === nextCell.value) ? true : false;
@@ -38,6 +41,7 @@ function getNextCell(cells, x, y, moveDirection) {
     switch(moveDirection) {
         case direction.up: {
             const coord = y - 1;
+            if (coord < 0) return {};
             const nextCell = cells.find(cell => {
                 if (cell.y === coord && cell.x === x) {
                     return cell
@@ -47,6 +51,7 @@ function getNextCell(cells, x, y, moveDirection) {
         };
         case direction.down: {
             const coord = y + 1;
+            if (coord > 3) return {};
             const nextCell = cells.find(cell => {
                 if (cell.y === coord && cell.x === x) {
                     return cell
@@ -56,6 +61,7 @@ function getNextCell(cells, x, y, moveDirection) {
         };
         case direction.left: {
             const coord = x - 1;
+            if (coord < 0) return {};
             const nextCell = cells.find(cell => {
                 if (cell.x === coord && cell.y === y) {
                     return cell
@@ -65,6 +71,7 @@ function getNextCell(cells, x, y, moveDirection) {
         };
         case direction.right: {
             const coord = x + 1;
+            if (coord > 3) return {};
             const nextCell = cells.find(cell => {
                 if (cell.x === coord && cell.y === y) {
                     return cell
@@ -74,60 +81,3 @@ function getNextCell(cells, x, y, moveDirection) {
         };
     };
 }
-
-function rotateMatrixForward(matrix, moveDirection) {
-    switch(moveDirection) {
-        case direction.down: {
-            rotate(matrix);
-            rotate(matrix);
-            break
-        }
-        case direction.left: {
-            rotate(matrix);
-            break
-        }
-        case direction.right: {
-            rotate(matrix);
-            rotate(matrix);
-            rotate(matrix);
-            break;
-        }
-        default: { break }
-    }
-};
-
-function rotateMatrixBack(matrix, moveDirection) {
-    switch(moveDirection) {
-        case direction.down: {
-            rotate(matrix);
-            rotate(matrix);
-            break
-        }
-        case direction.right: {
-            rotate(matrix);
-            break
-        }
-        case direction.left: {
-            rotate(matrix);
-            rotate(matrix);
-            rotate(matrix);
-            break;
-        }
-        default: { break }
-    }
-};
-
-function printMatrix(matrix) {
-    let printString = '[\n'
-  
-    Array.from(new Array(4), (x, i) => i).forEach(colNum => {
-      printString += '  '
-      printString += Array.from(new Array(4), (x, i) => i)
-        .map(rowNum => JSON.stringify(matrix[colNum][rowNum]).padStart(40, ' '))
-        .join(', ')
-      printString += ',\n'
-    })
-  
-    printString += ']'
-    console.log(printString)
-  }
