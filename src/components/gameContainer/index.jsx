@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import GameBgComponents from '../gameBgComponent/index.jsx';
 import GamePlaygroundComponent from '../gamePlaygroundComponent/index.jsx';
 
+import { moveCells } from '../../logic/moveCells.js';
+
 import initialCells from '../../gameData/index.js';
 
 const StyledWrapper = styled.section`
@@ -15,17 +17,19 @@ const StyledWrapper = styled.section`
 class GameContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.getNewState();
+        this.state = {
+            cells: initialCells
+        };
+
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
-    getNewState() {
-        return {
-            cells: initialCells
-        }
-    }
 
     handleKeyPress(event) {
-        console.log(event.code);
+        const newCells = moveCells(this.state.cells, 'UP');
+        this.setState({
+            cells: newCells
+        })
     }
 
     componentDidMount() {
@@ -40,7 +44,7 @@ class GameContainer extends React.Component {
         return (
             <StyledWrapper>
                 <GameBgComponents />
-                <GamePlaygroundComponent cells={initialCells}/>
+                <GamePlaygroundComponent cells={this.state.cells}/>
             </StyledWrapper>
         )
     }
