@@ -1,3 +1,6 @@
+/**
+ * Располагает игровое поле в случайном порядке
+ */
 export const randomCells = (cells) => {
     const min = 0;
     const max = 15;
