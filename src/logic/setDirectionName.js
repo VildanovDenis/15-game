@@ -1,5 +1,8 @@
 import { direction } from './moveCells.js';
 
+/**
+ * Преобразует код клавиши в направление движения
+ */
 export const setDirectionName = (keycode) => {
     let directionName = '';
     switch (keycode) {
