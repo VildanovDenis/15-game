@@ -1,5 +1,3 @@
-import rotate from 'matrix-rotate';
-
 export const direction = {
     up: 'UP',
     down: 'DOWN',
@@ -8,49 +6,77 @@ export const direction = {
 };
 
 export const moveCells = (cells, moveDirection) => {
-    // Создает матрицу 4х4 заполненную пустыми объектами;
-    const matrix = Array.from(
-        new Array(4), () => Array.from(new Array(4), () => new Object)
-    );
-
-    cells.forEach(cell => {
-        matrix[cell.y][cell.x] = cell;
-    })
-
-    rotateMatrixForward(matrix, moveDirection);
-
-    for (let y = 0; y < 4; y++) {
-        const isMooved = false;
-
-        for (let x = 0; x < 4; x++) {
-            if (matrix[y][x].value != '') { continue }
-            else {
-                // Текущая ячейка с пустым значением.
-                swapCells(matrix[y+1][x], matrix[y][x]);
-                isMooved = true;
-                break;
-            }
+    const emptyCell = cells.find(cell => {
+        if (cell.value === '') {
+            return cell
         }
+    });
 
-        if (isMooved) { 
-            isMooved = false; 
-            break 
-        };
-    }
+    const x = emptyCell.x;
+    const y = emptyCell.y;
 
-    rotateMatrixBack(matrix, moveDirection);
+    const nextCell = getNextCell(cells, x, y, moveDirection);
+    const newCells = cells.filter(cell => {
+        const isThereEmptyCell = (cell.value === emptyCell.value) ? true : false;
+        const isThereNextCell = (cell.value === nextCell.value) ? true : false;
 
-    const newCells = [...matrix[0], ...matrix[1], ...matrix[2], ...matrix[3]];
+        if (isThereEmptyCell || isThereNextCell) {
+            return false
+        } else return true
+    });
 
-    return newCells;
+    emptyCell.x = nextCell.x;
+    emptyCell.y = nextCell.y;
+
+    nextCell.x = x;
+    nextCell.y = y;
+
+    return [...newCells, nextCell, emptyCell]
 };
 
+function getNextCell(cells, x, y, moveDirection) {
+    switch(moveDirection) {
+        case direction.up: {
+            const coord = y - 1;
+            const nextCell = cells.find(cell => {
+                if (cell.y === coord && cell.x === x) {
+                    return cell
+                };
+            });
+            return nextCell
+        };
+        case direction.down: {
+            const coord = y + 1;
+            const nextCell = cells.find(cell => {
+                if (cell.y === coord && cell.x === x) {
+                    return cell
+                };
+            });
+            return nextCell
+        };
+        case direction.left: {
+            const coord = x - 1;
+            const nextCell = cells.find(cell => {
+                if (cell.x === coord && cell.y === y) {
+                    return cell
+                };
+            });
+            return nextCell
+        };
+        case direction.right: {
+            const coord = x + 1;
+            const nextCell = cells.find(cell => {
+                if (cell.x === coord && cell.y === y) {
+                    return cell
+                };
+            });
+            return nextCell
+        };
+    };
+}
 
 function rotateMatrixForward(matrix, moveDirection) {
     switch(moveDirection) {
-        case direction.up: {
-            break
-        };
         case direction.down: {
             rotate(matrix);
             rotate(matrix);
@@ -72,9 +98,6 @@ function rotateMatrixForward(matrix, moveDirection) {
 
 function rotateMatrixBack(matrix, moveDirection) {
     switch(moveDirection) {
-        case direction.up: {
-            break
-        };
         case direction.down: {
             rotate(matrix);
             rotate(matrix);
@@ -93,20 +116,6 @@ function rotateMatrixBack(matrix, moveDirection) {
         default: { break }
     }
 };
-
-function swapCells(prevCell, curCell) {
-    const prevCellY = prevCell.y;
-    const prevCellId = prevCell.id;
-    const prevCellValue = prevCell.value;
-
-    prevCell.y = curCell.y;
-    prevCell.id = curCell.id;
-    prevCell.value = curCell.value;
-
-    curCell.y = prevCellY;
-    curCell.id = prevCellId;
-    curCell.value = prevCellValue;
-}
 
 function printMatrix(matrix) {
     let printString = '[\n'

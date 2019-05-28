@@ -1,21 +1,21 @@
 import { direction } from './moveCells.js';
 
 export const setDirectionName = (keycode) => {
-    const directionName = '';
+    let directionName = '';
     switch (keycode) {
-        case 'keyA': {
+        case 'KeyA': {
             directionName = direction.left;
             break;
         };
-        case 'keyW': {
+        case 'KeyW': {
             directionName = direction.up;
             break;
         };
-        case 'keyS': {
+        case 'KeyS': {
             directionName = direction.down;
             break;
         };
-        case 'keyD': {
+        case 'KeyD': {
             directionName = direction.right;
             break;
         };

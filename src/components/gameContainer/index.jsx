@@ -6,6 +6,7 @@ import GamePlaygroundComponent from '../gamePlaygroundComponent/index.jsx';
 
 import { moveCells } from '../../logic/moveCells.js';
 import { randomCells } from '../../logic/randomCells.js';
+import { setDirectionName } from '../../logic/setDirectionName.js';
 
 import { initialCells } from '../../gameData/index.js';
 
@@ -27,13 +28,16 @@ class GameContainer extends React.Component {
 
 
     handleKeyPress(event) {
-        const { cells } = this.state;
+        const direction = setDirectionName(event.code);
 
-        const newCells = moveCells(cells, 'RIGHT');
+        if (direction !== '') {
+            const { cells } = this.state;
+            const newCells = moveCells(cells, direction);
 
-        this.setState({
-            cells: newCells
-        })
+            this.setState({
+                cells: newCells
+            })
+        };
     }
 
     componentDidMount() {
