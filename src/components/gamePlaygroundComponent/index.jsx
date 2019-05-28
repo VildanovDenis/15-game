@@ -27,7 +27,7 @@ const calcCellBg = value => {
     } else { return 'rgba(238, 228, 218, 0.9)'}
 }
 
-class GamePlaygroundComponent extends React.PureComponent {
+class GamePlaygroundComponent extends React.Component {
     render() {
         const {cells} = this.props;
         return (

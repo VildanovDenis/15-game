@@ -5,8 +5,9 @@ import GameBgComponents from '../gameBgComponent/index.jsx';
 import GamePlaygroundComponent from '../gamePlaygroundComponent/index.jsx';
 
 import { moveCells } from '../../logic/moveCells.js';
+import { randomCells } from '../../logic/randomCells.js';
 
-import initialCells from '../../gameData/index.js';
+import { initialCells } from '../../gameData/index.js';
 
 const StyledWrapper = styled.section`
     height: 475px;
@@ -18,7 +19,7 @@ class GameContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cells: initialCells
+            cells: []
         };
 
         this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -26,13 +27,20 @@ class GameContainer extends React.Component {
 
 
     handleKeyPress(event) {
-        const newCells = moveCells(this.state.cells, 'UP');
+        const { cells } = this.state;
+        const newCells = moveCells(cells, 'LEFT');
+
         this.setState({
             cells: newCells
         })
     }
 
     componentDidMount() {
+        const newCells = randomCells(initialCells);
+        this.setState({
+            cells: newCells
+        });
+
         document.addEventListener('keypress', this.handleKeyPress);
     }
 
@@ -41,10 +49,12 @@ class GameContainer extends React.Component {
     }
 
     render() {
+        const { cells } = this.state;
+
         return (
             <StyledWrapper>
                 <GameBgComponents />
-                <GamePlaygroundComponent cells={this.state.cells}/>
+                <GamePlaygroundComponent cells={cells}/>
             </StyledWrapper>
         )
     }
