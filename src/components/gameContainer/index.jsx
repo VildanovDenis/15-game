@@ -27,7 +27,6 @@ class GameContainer extends React.Component {
 
 
     handleKeyPress(event) {
-        console.log("clicked!");
         const { cells } = this.state;
 
         const newCells = moveCells(cells, 'RIGHT');

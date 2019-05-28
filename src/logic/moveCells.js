@@ -18,7 +18,6 @@ export const moveCells = (cells, moveDirection) => {
     })
 
     rotateMatrixForward(matrix, moveDirection);
-    printMatrix(matrix);
 
     for (let y = 0; y < 4; y++) {
         const isMooved = false;
@@ -39,7 +38,6 @@ export const moveCells = (cells, moveDirection) => {
         };
     }
 
-    printMatrix(matrix);
     rotateMatrixBack(matrix, moveDirection);
 
     const newCells = [...matrix[0], ...matrix[1], ...matrix[2], ...matrix[3]];
