@@ -14,7 +14,7 @@ const StyledCell = styled(StyledBgCell)`
     background-color: ${({value}) => calcCellBg(value)};
     position: absolute;
     transition-property: transform;
-    transition: 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
     color: #6a4e4e;
     font-weight: 700;
     font-size: 66px;
