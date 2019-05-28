@@ -27,8 +27,10 @@ class GameContainer extends React.Component {
 
 
     handleKeyPress(event) {
+        console.log("clicked!");
         const { cells } = this.state;
-        const newCells = moveCells(cells, 'LEFT');
+
+        const newCells = moveCells(cells, 'RIGHT');
 
         this.setState({
             cells: newCells
@@ -37,6 +39,7 @@ class GameContainer extends React.Component {
 
     componentDidMount() {
         const newCells = randomCells(initialCells);
+
         this.setState({
             cells: newCells
         });

@@ -5,7 +5,7 @@ export const direction = {
     down: 'DOWN',
     left: 'LEFT',
     right: 'RIGHT'
-}
+};
 
 export const moveCells = (cells, moveDirection) => {
     // Создает матрицу 4х4 заполненную пустыми объектами;
@@ -18,6 +18,7 @@ export const moveCells = (cells, moveDirection) => {
     })
 
     rotateMatrixForward(matrix, moveDirection);
+    printMatrix(matrix);
 
     for (let y = 0; y < 4; y++) {
         const isMooved = false;
@@ -25,9 +26,8 @@ export const moveCells = (cells, moveDirection) => {
         for (let x = 0; x < 4; x++) {
             if (matrix[y][x].value != '') { continue }
             else {
-                const cellValue = matrix[y+1][x];
-                matrix[y+1][x] = matrix[y][x] ;
-                matrix[y][x] = cellValue;
+                // Текущая ячейка с пустым значением.
+                swapCells(matrix[y+1][x], matrix[y][x]);
                 isMooved = true;
                 break;
             }
@@ -39,12 +39,13 @@ export const moveCells = (cells, moveDirection) => {
         };
     }
 
+    printMatrix(matrix);
     rotateMatrixBack(matrix, moveDirection);
 
     const newCells = [...matrix[0], ...matrix[1], ...matrix[2], ...matrix[3]];
 
     return newCells;
-}
+};
 
 
 function rotateMatrixForward(matrix, moveDirection) {
@@ -69,7 +70,7 @@ function rotateMatrixForward(matrix, moveDirection) {
         }
         default: { break }
     }
-}
+};
 
 function rotateMatrixBack(matrix, moveDirection) {
     switch(moveDirection) {
@@ -93,4 +94,33 @@ function rotateMatrixBack(matrix, moveDirection) {
         }
         default: { break }
     }
+};
+
+function swapCells(prevCell, curCell) {
+    const prevCellY = prevCell.y;
+    const prevCellId = prevCell.id;
+    const prevCellValue = prevCell.value;
+
+    prevCell.y = curCell.y;
+    prevCell.id = curCell.id;
+    prevCell.value = curCell.value;
+
+    curCell.y = prevCellY;
+    curCell.id = prevCellId;
+    curCell.value = prevCellValue;
 }
+
+function printMatrix(matrix) {
+    let printString = '[\n'
+  
+    Array.from(new Array(4), (x, i) => i).forEach(colNum => {
+      printString += '  '
+      printString += Array.from(new Array(4), (x, i) => i)
+        .map(rowNum => JSON.stringify(matrix[colNum][rowNum]).padStart(40, ' '))
+        .join(', ')
+      printString += ',\n'
+    })
+  
+    printString += ']'
+    console.log(printString)
+  }
