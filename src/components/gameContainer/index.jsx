@@ -11,9 +11,13 @@ import { setDirectionName } from '../../logic/setDirectionName.js';
 import { initialCells } from '../../gameData/index.js';
 
 const StyledWrapper = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 475px;
     position: relative;
     width: 475px;
+    margin: 0 auto;
 `;
 
 class GameContainer extends React.Component {
