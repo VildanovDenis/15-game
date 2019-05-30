@@ -22,7 +22,7 @@ export const moveCells = (cells, moveDirection) => {
     const nextCell = getNextCell(cells, emptyX, emptyY, moveDirection);
     const isNextCellEmpty = !nextCell;
     if (isNextCellEmpty) {
-        return cells;
+        return null;
     };
 
     const {x: nextX, y: nextY} = nextCell;

@@ -56,16 +56,18 @@ class GameContainer extends React.Component {
 
     handleKeyPress(event) {
         const direction = setDirectionName(event.code);
-        const newSteps = this.state.steps + 1;
-
         if (direction !== '') {
             const { cells } = this.state;
             const newCells = moveCells(cells, direction);
 
-            this.setState({
-                cells: newCells,
-                steps: newSteps
-            })
+            if (Boolean(newCells)) {
+                const newSteps = this.state.steps + 1;
+
+                this.setState({
+                    cells: newCells,
+                    steps: newSteps
+                })
+            }
         };
     }
 
