@@ -39,6 +39,7 @@ const StyledBtn = styled.button`
     text-align: center;
     background-color: rgba(238,228,218,0.9);
     color: #6a4e4e;
+    outline: 0;
 `;
 
 class GameContainer extends React.Component {
