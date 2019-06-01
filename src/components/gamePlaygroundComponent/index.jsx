@@ -19,6 +19,7 @@ const StyledCell = styled(StyledBgCell)`
     font-weight: 700;
     font-size: 66px;
     font-family: 'Roboto', sans-serif;
+    user-select: none;
 `;
 
 const calcCellBg = value => {
