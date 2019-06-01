@@ -6,19 +6,20 @@ import { direction } from './moveCells.js';
 export const setDirectionName = (keycode) => {
     switch (keycode) {
         case 'KeyA': {
-            return direction.left;
+            return direction.left
         };
 
         case 'KeyW': {
-            return direction.up;
+            return direction.up
         };
 
         case 'KeyS': {
-            return direction.down;
+            return direction.down
         };
 
         case 'KeyD': {
-            return direction.right;
+            return direction.right
         };
     };
+    return ''
 }
