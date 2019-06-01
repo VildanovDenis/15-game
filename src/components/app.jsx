@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GameContainer from './gameContainer/index.jsx';
+import { GameContainer } from './gameContainer';
 
 export default class App extends React.Component {
     render() {

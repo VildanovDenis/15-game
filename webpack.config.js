@@ -24,6 +24,9 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),

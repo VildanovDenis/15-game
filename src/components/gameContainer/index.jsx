@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import GameBgComponents from '../gameBgComponent/index.jsx';
-import GamePlaygroundComponent from '../gamePlaygroundComponent/index.jsx';
-
-import { moveCells } from '../../logic/moveCells.js';
-import { randomCells } from '../../logic/randomCells.js';
-import { setDirectionName } from '../../logic/setDirectionName.js';
+import {GameBgComponents} from '../gameBgComponent';
+import {GamePlaygroundComponent} from '../gamePlaygroundComponent';
+ 
+import { moveCells } from '../../logic/moveCells';
+import { randomCells } from '../../logic/randomCells';
+import { setDirectionName } from '../../logic/setDirectionName';
 
 import { initialCells } from '../../gameData/index.js';
 
@@ -42,7 +42,7 @@ const StyledBtn = styled.button`
     outline: 0;
 `;
 
-class GameContainer extends React.Component {
+export class GameContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -118,4 +118,4 @@ class GameContainer extends React.Component {
     }
 }
 
-export default GameContainer;
+// export default GameContainer;
