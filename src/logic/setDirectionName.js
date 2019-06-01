@@ -4,26 +4,21 @@ import { direction } from './moveCells.js';
  * Преобразует код клавиши в направление движения
  */
 export const setDirectionName = (keycode) => {
-    let directionName = '';
     switch (keycode) {
         case 'KeyA': {
-            directionName = direction.left;
-            break;
+            return direction.left;
         };
-        case 'KeyW': {
-            directionName = direction.up;
-            break;
-        };
-        case 'KeyS': {
-            directionName = direction.down;
-            break;
-        };
-        case 'KeyD': {
-            directionName = direction.right;
-            break;
-        };
-        default: { break };
-    };
 
-    return directionName
+        case 'KeyW': {
+            return direction.up;
+        };
+
+        case 'KeyS': {
+            return direction.down;
+        };
+
+        case 'KeyD': {
+            return direction.right;
+        };
+    };
 }
